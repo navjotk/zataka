@@ -28,6 +28,5 @@ Player.prototype.handlePositionChanged = function(x,y) {
 
 Player.prototype.kill = function() {
 	this.isAlive = false;
-	console.log(this.game.activePlayerCount);
 	this.game.activePlayerCount--;
 };
