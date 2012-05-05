@@ -52,11 +52,8 @@ Game.prototype.initializeKeyCodes = function() {
 }
 
 Game.prototype.keyDown = function(event) {
-	console.log(event.keyCode);
 	if(this.keyCodes[event.keyCode]!=undefined) {
-		//console.log(this.keyCodes[event.keyCode]);
 		var code = this.keyCodes[event.keyCode];
-		console.log(code);
 		var player = this.players[code.player];
 		player.setInput(code.action);
 	}

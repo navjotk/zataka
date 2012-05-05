@@ -33,7 +33,11 @@ Engine.prototype.updateState = function(player) {
   player.position.setPosition (x, y);
   
   //Update position history
-  player.positionHistory.push (new Position(x,y));
+  x = Math.round(x);
+  y = Math.round(y);
+  if ( player.positionHistory.length == 0 || x != ((player.positionHistory[player.positionHistory.length-1]).x) || 
+		y != ((player.positionHistory[player.positionHistory.length-1]).y) )
+	player.positionHistory.push (new Position(x,y));
   
   //Reset the input
   player.setInput (0);
@@ -45,18 +49,26 @@ Engine.prototype.getCollisions = function(players) {
   	var player = players[player];
     if (!player.isAlive)
 	  continue;
+	if (player.position.x < 1 || player.position.x > game.SCREEN_WIDTH ||
+			player.position.y < 1 || player.position.y > game.SCREEN_HEIGHT) {
+		player.isAlive = false;
+		continue;
+	}
 
 	//Get other player collisions
 	for (otherPlayer in players) {
 		var otherPlayer = players[otherPlayer];
 	  if (!player.isAlive)
 	    break;
-	  if (player == otherPlayer)
-	    continue;
-	  for (otherPosition in otherPlayer.positionHistory) {
+//	  if (player == otherPlayer) continue;
+	  var otherPositionHistory = otherPlayer.positionHistory;
+	  for (otherPosition in otherPositionHistory) {
+			if (player == otherPlayer && otherPosition == (otherPositionHistory.length-1))
+				continue;
 			// Collided with opponent?
-			var otherPosition = otherPlayer.positionHistory[otherPosition];
-			if (Math.round(player.position.x) == Math.round(otherPosition.x) && Math.round(player.position.y) == Math.round(otherPosition.y)) {
+			var otherPosition = otherPositionHistory[otherPosition];
+			if (Math.round(player.position.x) == otherPosition.x &&
+					Math.round(player.position.y) == otherPosition.y) {
 			  player.isAlive = false;
 			  break;
 			}

@@ -2,7 +2,6 @@ function Player(color, renderer, initial_position, initial_velocity) {
 	this.color = color;
 	this.renderer = renderer;
 	this.renderer.drawDot(initial_position.x, initial_position.y, this.color);
-	console.log(initial_velocity);
 	this.position = initial_position;
 	this.velocity = initial_velocity;
 	this.input = 0;
