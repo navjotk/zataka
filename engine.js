@@ -57,7 +57,7 @@ Engine.prototype.getCollisions = function(players) {
 			// Collided with opponent?
 			var otherPosition = otherPlayer.positionHistory[otherPosition];
 			if (Math.round(player.position.x) == Math.round(otherPosition.x) && Math.round(player.position.y) == Math.round(otherPosition.y)) {
-			  player.isAlive = false;
+			  player.kill();
 			  break;
 			}
 		}
