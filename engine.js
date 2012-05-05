@@ -20,8 +20,9 @@ Engine.prototype.getRandomLocationAndVelocity = function() {
 
 Engine.prototype.process = function(players) {
   for (player in players) {
-	updateState (player);
-  //getCollisions (players);
+    if (player.isAlive)
+	  updateState (player);
+  getCollisions (players);
   }
 }
 
@@ -48,48 +49,24 @@ Engine.prototype.updateState = function(player) {
   player.setInput (0);
 }
 
-/*
 Engine.prototype.getCollisions = function(players) {
-  curentPositions = positionHistory[positionHistory.size()-1];
-  
   //Process collisions for each player's current position
-  for (i=0; n<currentPositions.size(); ++i) {
-    if (!isAlive[i])
+  for (player in players) {
+    if (!player.isAlive)
 	  continue;
-    position = currentPositions[i];
-	
-	//Get current position
-    x = position.getX();
-    y = position.getY();
-	
-	//Get maze collisions
-	for (m=0; m<maze.size(); ++m) {
-	  mazeX = maze.getX();
-	  mazeY = maze.getY();
-	  if (x == mazeX && y == mazeY) {
-	    isAlive[i] = false;
-		break;
-	  }
-	}
 
 	//Get other player collisions
-	for (j=0; j<currentPositions.size(); ++j) {
-	  if (!isAlive[i])
+	for (otherPlayer in players) {
+	  if (!player.isAlive)
 	    break;
-	  if (i==j || !isAlive[j])
+	  if (!otherPlayer.isAlive || otherPlayer == player)
 	    continue;
-	  for (k=0; k<positionHistor.size(); ++k) {
-	    opponentPosition = positionHistory[k][j];
-		ox = opponentPosition.getX();
-		oy = opponentPosition.getY();
+	  for (otherPosition in otherPlayer.positionHistory)
 		// Collided with opponent?
-		if (x == ox && y == oy) {
-		  isAlive[i] = false;
+		if (player.position.x == otherPosition.x && player.position.y == otherPosition.y) {
+		  player.isAlive = false;
 		  break;
 		}
-	  }
 	}
   }
 }
-		
-*/
