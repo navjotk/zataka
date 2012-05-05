@@ -59,7 +59,7 @@ function Position(x, y) {
 	this.y = y;
 }
 
-Position.prototype.setPosition (x,y) {
+Position.prototype.setPosition = function (x,y) {
     this.x = x;
 	this.y = y;
 }
