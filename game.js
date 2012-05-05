@@ -1,7 +1,7 @@
 function Game(canvas, timerCanvas) {
 	this.SCREEN_HEIGHT = 500;
 	this.SCREEN_WIDTH = 500;
-	this.PLAYER_SPEED = 0.1;
+	this.PLAYER_SPEED = 10;
 	this.TIMER_INTERVAL = 500;
 	this.THETA_MOVE = 0.05;
 	this.players = new Array();
@@ -52,11 +52,11 @@ Game.prototype.initializeKeyCodes = function() {
 }
 
 Game.prototype.keyDown = function(event) {
-	console.log(event.keyCode);
+	//console.log(event.keyCode);
 	if(this.keyCodes[event.keyCode]!=undefined) {
-		console.log(this.keyCodes[event.keyCode]);
+		//console.log(this.keyCodes[event.keyCode]);
 		var code = this.keyCodes[event.keyCode];
-		console.log(code);
+		//console.log(code);
 		var player = this.players[code.player];
 		player.setInput(code.action);
 	}
@@ -93,11 +93,11 @@ function Position(x, y) {
 }
 
 Position.prototype.setPosition = function (x,y) {
+	if(this.changeListener!=null) {
+		this.changeListener(x,y);
+	}
     this.x = x;
 	this.y = y;
-	if(this.changeListener!=null) {
-		this.changeListener(this.x, this.y);
-	}
 }
 
 Position.prototype.setListener = function(listener) {

@@ -20,7 +20,6 @@ Engine.prototype.getRandomLocationAndVelocity = function() {
 
 Engine.prototype.updateState = function(player) {
   var turn = 0;
-  console.log('called');
   //Get turn
   turn = player.input * this.game.THETA_MOVE;
   
@@ -67,7 +66,6 @@ Engine.prototype.getCollisions = function(players) {
 Engine.prototype.process = function(players) {
   for (player in players) {
   	var player = players[player];
-  	console.log(player);
     if (player.isAlive)
 	  this.updateState (player);
   	this.getCollisions (players);
