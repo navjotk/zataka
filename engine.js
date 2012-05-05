@@ -4,8 +4,8 @@ function Engine(game) {
 
 Engine.prototype.getRandomLocationAndVelocity = function() {
   position = new Position();
-  position.x = Math.round (Math.random () * this.game.SCREEN_WIDTH);
-  position.y = Math.round (Math.random () * this.game.SCREEN_HEIGHT);
+  position.x = Math.round ( (this.game.SCREEN_WIDTH * 0.2) + (Math.random () * this.game.SCREEN_WIDTH * 0.6) );
+  position.y = Math.round ( (this.game.SCREEN_HEIGHT * 0.2) + (Math.random () * this.game.SCREEN_HEIGHT * 0.6) );
   
   velocity = new Velocity();
   theta = Math.random () * Math.PI * 2;
