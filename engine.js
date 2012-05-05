@@ -1,9 +1,8 @@
-function Engine (players, game) {
-  this.players = players;
-  this.game = game
+function Engine(game) {
+  this.game = game;
 }
 
-Engine.prototype.getRandomLocationAndVelocity () {
+Engine.prototype.getRandomLocationAndVelocity = function() {
   position = new Position();
   position.x = Math.round (Math.random () * this.game.SCREEN_WIDTH);
   position.y = Math.round (Math.random () * this.game.SCREEN_HEIGHT);
@@ -17,7 +16,7 @@ Engine.prototype.getRandomLocationAndVelocity () {
   locationAndVelocity[0] = position;
   locationAndVelocity[1] = velocity;
   return locationAndVelocity;
-)
+};
 
 /*Engine.prototype.process = function(players, maze) {
   for (player in players) {
