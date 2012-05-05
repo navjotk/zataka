@@ -1,4 +1,4 @@
-function Player(color, renderer, initial_position, initial_velocity) {
+function Player(color, renderer, initial_position, initial_velocity, game) {
 	this.color = color;
 	this.renderer = renderer;
 	this.renderer.drawDot(initial_position.x, initial_position.y, this.color);
@@ -7,6 +7,7 @@ function Player(color, renderer, initial_position, initial_velocity) {
 	this.input = 0;
 	this.isAlive = true;
 	this.positionHistory = new Array();
+	this.game = game;
 	var theObj = this;
 	this.position.setListener(function(x,y) {theObj.handlePositionChanged(x,y);});
 }
@@ -23,4 +24,10 @@ Player.prototype.handlePositionChanged = function(x,y) {
 	var diff_x = x - this.position.x;
 	var diff_y = y - this.position.y;
 	this.moveBy(diff_x, diff_y);
+};
+
+Player.prototype.kill = function() {
+	this.isAlive = false;
+	console.log(this.game.activePlayerCount);
+	this.game.activePlayerCount--;
 };

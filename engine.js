@@ -51,7 +51,7 @@ Engine.prototype.getCollisions = function(players) {
 	  continue;
 	if (player.position.x < 1 || player.position.x > game.SCREEN_WIDTH ||
 			player.position.y < 1 || player.position.y > game.SCREEN_HEIGHT) {
-		player.isAlive = false;
+		player.kill();
 		continue;
 	}
 
@@ -69,7 +69,7 @@ Engine.prototype.getCollisions = function(players) {
 			var otherPosition = otherPositionHistory[otherPosition];
 			if (Math.round(player.position.x) == otherPosition.x &&
 					Math.round(player.position.y) == otherPosition.y) {
-			  player.isAlive = false;
+			  player.kill();
 			  break;
 			}
 		}

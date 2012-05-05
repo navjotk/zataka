@@ -12,6 +12,7 @@ function Game(canvas, timerCanvas) {
 	this.engine = new Engine(this);
 	this.countdownTime = 3;
 	this.timerCanvas = timerCanvas;
+	this.activePlayerCount = 0;
 	timerCanvas.innerHTML = "Starting";
 	window.setTimeout("game.countdownTick()", 1000 );
 }
@@ -22,7 +23,8 @@ Game.prototype.addPlayer = function() {
 	}
 	var initial_location_velocity = this.engine.getRandomLocationAndVelocity();
 	var color = this.colors[this.players.length];
-	var player = new Player(color, this.renderer, initial_location_velocity[0], initial_location_velocity[1]);
+	var player = new Player(color, this.renderer, initial_location_velocity[0], initial_location_velocity[1], game);
+	this.activePlayerCount++;
 	this.players.push(player);
 	return true;
 }
@@ -70,6 +72,7 @@ Game.prototype.start = function() {
 Game.prototype.tick = function() {
 	//Game tick
 	this.engine.process(this.players);
+	if(this.activePlayerCount!=1) 
 	window.setTimeout("game.tick()", this.TIMER_INTERVAL);
 }
 
