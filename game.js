@@ -72,8 +72,18 @@ Game.prototype.start = function() {
 Game.prototype.tick = function() {
 	//Game tick
 	this.engine.process(this.players);
+	this.timerCanvas.innerHTML = (this.getScoreboard(game.players));
 	if(this.activePlayerCount!=1) 
 	window.setTimeout("game.tick()", this.TIMER_INTERVAL);
+}
+
+Game.prototype.getScoreboard = function(players) {
+	retStr = "";
+	for (player in players) {
+		var player = players[player];
+		retStr = retStr + "<div style='text-align:center; width:80; font-weight:bold; background-color:" + player.color + "; color:#FFF'>" + ((player.isAlive)? ((this.activePlayerCount == 1)? "WINNER":"ALIVE"):"DEAD" + "</div>");
+	}
+	return retStr;
 }
 
 var game;
