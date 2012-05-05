@@ -34,8 +34,15 @@ Game.prototype.countdownTick = function() {
 	this.countdownTime--;
 	window.setTimeout("game.countdownTick()", 1000);
 }
+
+Game.prototype.keyDown = function(event) {
+	console.log(event);
+}
 Game.prototype.start = function() {
 	window.setTimeout("game.tick()", this.TIMER_INTERVAL);
+	window.onkeydown = function(event) {
+		game.keyDown(event);
+	}
 }
 
 Game.prototype.tick = function() {
