@@ -18,17 +18,9 @@ Engine.prototype.getRandomLocationAndVelocity = function() {
   return locationAndVelocity;
 };
 
-Engine.prototype.process = function(players) {
-  for (player in players) {
-    if (player.isAlive)
-	  updateState (player);
-  getCollisions (players);
-  }
-}
-
 Engine.prototype.updateState = function(player) {
   var turn = 0;
-  
+  console.log('called');
   //Get turn
   turn = player.input * this.game.THETA_MOVE;
   
@@ -68,5 +60,14 @@ Engine.prototype.getCollisions = function(players) {
 		  break;
 		}
 	}
+  }
+}
+
+
+Engine.prototype.process = function(players) {
+  for (player in players) {
+    if (player.isAlive)
+	  this.updateState (player);
+  	this.getCollisions (players);
   }
 }
