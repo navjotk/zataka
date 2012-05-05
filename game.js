@@ -7,6 +7,8 @@ function Game(canvas, timerCanvas) {
 	this.players = new Array();
 	this.renderer = new Renderer(canvas, this);
 	this.colors = ['#f00', '#0f0', '#00f'];
+	this.keyMappings = [[37,39]];
+	this.keyCodes = {};
 	this.engine = new Engine(this);
 	this.countdownTime = 3;
 	this.timerCanvas = timerCanvas;
@@ -36,18 +38,40 @@ Game.prototype.countdownTick = function() {
 	window.setTimeout("game.countdownTick()", 1000);
 }
 
+Game.prototype.initializeKeyCodes = function() {
+	for(i=0;i<this.keyMappings.length;i++) {
+		var keyCode = {};
+		keyCode.action = -1;
+		keyCode.player = i;
+		this.keyCodes[this.keyMappings[i][0]] = keyCode;
+		var keyCode = {};
+		keyCode.action = 1;
+		keyCode.player = i;
+		this.keyCodes[this.keyMappings[i][1]] = keyCode;
+	}
+}
+
 Game.prototype.keyDown = function(event) {
-	console.log(event);
+	console.log(event.keyCode);
+	if(this.keyCodes[event.keyCode]!="undefined") {
+		console.log(this.keyCodes[event.keyCode]);
+		var code = this.keyCodes[event.keyCode];
+		var player = this.players[code.player];
+		player.setInput(code.action);
+	}
+	
 }
 Game.prototype.start = function() {
 	window.setTimeout("game.tick()", this.TIMER_INTERVAL);
 	window.onkeydown = function(event) {
 		game.keyDown(event);
 	}
+	game.initializeKeyCodes();
 }
 
 Game.prototype.tick = function() {
 	//Game tick
+	this.engine.process(this.players);
 	window.setTimeout("game.tick()", this.TIMER_INTERVAL);
 }
 

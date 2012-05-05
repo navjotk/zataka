@@ -5,6 +5,8 @@ function Player(color, renderer, initial_position, initial_velocity) {
 	this.position = initial_position;
 	this.velocity = initial_velocity;
 	this.input = 0;
+	this.isAlive = true;
+	this.positionHistory = new Array();
 }
 
 Player.prototype.moveBy = function(diff_x, diff_y) {
