@@ -31,7 +31,12 @@ function Position(x,y) {
 	this.y = y;
 }
 
-function Velocity(dx,dy) {
-	this.dx = dx;
-	this.dy = dy;
+function Velocity() {
+}
+
+Velocity.prototype.setPolar = function (mag, theta) {
+	this.mag = mag;
+	this.theta = theta;
+	this.dy = this.mag * Math.sin (this.theta);
+    this.dx = this.mag * Math.cos (this.theta);
 }

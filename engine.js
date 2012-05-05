@@ -4,13 +4,13 @@ function Engine(game) {
 
 Engine.prototype.getRandomLocationAndVelocity = function() {
   position = new Position();
-  position.x = Math.round ( (this.game.SCREEN_WIDTH * 0.2) + (Math.random () * this.game.SCREEN_WIDTH * 0.6) );
-  position.y = Math.round ( (this.game.SCREEN_HEIGHT * 0.2) + (Math.random () * this.game.SCREEN_HEIGHT * 0.6) );
+  position.x = (this.game.SCREEN_WIDTH * 0.2) + (Math.random () * this.game.SCREEN_WIDTH * 0.6);
+  position.y = (this.game.SCREEN_HEIGHT * 0.2) + (Math.random () * this.game.SCREEN_HEIGHT * 0.6);
   
   velocity = new Velocity();
+  mag = this.game.PLAYER_SPEED;
   theta = Math.random () * Math.PI * 2;
-  velocity.dy = this.game.PLAYER_SPEED * Math.sin (theta);
-  velocity.dx = this.game.PLAYER_SPEED * Math.cos (theta);
+  velocity.setPolar (mag,theta);
   
   locationAndVelocity = new Array();
   locationAndVelocity[0] = position;
@@ -18,13 +18,47 @@ Engine.prototype.getRandomLocationAndVelocity = function() {
   return locationAndVelocity;
 };
 
-/*Engine.prototype.process = function(players, maze) {
+Engine.prototype.process = function(players) {
   for (player in players) {
 	updateState (player);
-	updateHistory (positions, positionsHistory);
-	getCollisions (positions, positionHistory, maze);
+  //getCollisions (players);
 }
 
+Engine.prototype.updateState = function(player) {
+  var turn = 0;
+  
+  //Get input
+  switch(player.input.which) {
+    //left
+    case 37:
+      turn = this.THETA_MOVE;
+      break;
+    //right
+    case 39:
+      turn = -1 * this.THETA_MOVE
+	  break;
+	case 0:
+	  turn = 0;
+  }
+  
+  //Update velocity first
+  mag = player.velocity.mag;
+  theta = player.velocity.theta + turn;
+  player.velocity.setPolar (mag,theta);
+  
+  //Update position
+  x = player.position.x + velocity.dx;
+  y = player.position.y + velocity.dy;
+  player.position.setPosition (x, y);
+  
+  //Update position history
+  player.positionHistory.push (new position(x,y));
+  
+  //Reset the input
+  player.setInput (0);
+}
+
+/*
 Engine.prototype.getCollisions = function(positionHistory, isAlive, maze) {
   curentPositions = positionHistory[positionHistory.size()-1];
   
@@ -68,36 +102,4 @@ Engine.prototype.getCollisions = function(positionHistory, isAlive, maze) {
   }
 }
 		
-Engine.prototype.updateHistory = function(positions, positionHistory) {
-  positionHistory.add (positions);
-}
-
-Engine.prototype.updateState = function(positions, inputs) {
-  if (positions.size() != inputs.size())
-    return -1;
-  
-  for (i=0; i<positions.size(); ++i) {
-    position = positions[i];
-    x = position.getX();
-    y = position.getY();
-    dx = position.getDx();
-    dy = position.getDy();
-    in = input[i];
-    switch(in.which) {
-      //left
-      case 37:
-        turn = -1;
-        break;
-      //right
-      case 39:
-        turn = 1;
-    }
-	
-	dx
-	
-	position.setX ( x+dx+ddx );
-	position.setY ( y+dy+ddy );
-	position.setDx ( dx
-  }
-}
 */
