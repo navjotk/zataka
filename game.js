@@ -1,6 +1,7 @@
 function Game(canvas) {
 	this.SCREEN_HEIGHT = 500;
 	this.SCREEN_WIDTH = 500;
+	this.PLAYER_SPEED = 5;
 	this.players = new Array();
 	this.renderer = new Renderer(canvas, this);
 	this.colors = ['#f00', '#0f0', '#00f'];
