@@ -4,7 +4,7 @@ function Game(canvas) {
 	this.players = new Array();
 	this.renderer = new Renderer(canvas, this);
 	this.colors = ['#f00', '#0f0', '#00f'];
-	this.engine = new Engine();
+	this.engine = new Engine(this);
 }
 
 Game.prototype.addPlayer = function() {
@@ -22,6 +22,8 @@ var game;
 window.onload = function() {
 	game = new Game(document.getElementById('canvas_container'));
 	game.addPlayer();
+	game.addPlayer();
+	game.addPlayer();
 }
 
 function Position(x,y) {
@@ -33,11 +35,3 @@ function Velocity(dx,dy) {
 	this.dx = dx;
 	this.dy = dy;
 }
-
-function Engine() {
-}
-
-Engine.prototype.getRandomLocationAndVelocity = function() {
-	var ret = new Array(new Position(100,100), new Velocity(1,1));
-	return ret;
-};
