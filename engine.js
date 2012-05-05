@@ -28,19 +28,8 @@ Engine.prototype.process = function(players) {
 Engine.prototype.updateState = function(player) {
   var turn = 0;
   
-  //Get input
-  switch(player.input.which) {
-    //left
-    case 37:
-      turn = this.game.THETA_MOVE;
-      break;
-    //right
-    case 39:
-      turn = -1 * this.game.THETA_MOVE
-	  break;
-	case 0:
-	  turn = 0;
-  }
+  //Get turn
+  turn = player.input * this.game.THETA_MOVE;
   
   //Update velocity first
   mag = player.velocity.mag;
@@ -60,7 +49,7 @@ Engine.prototype.updateState = function(player) {
 }
 
 /*
-Engine.prototype.getCollisions = function(positionHistory, isAlive, maze) {
+Engine.prototype.getCollisions = function(players) {
   curentPositions = positionHistory[positionHistory.size()-1];
   
   //Process collisions for each player's current position
