@@ -54,8 +54,13 @@ window.onload = function() {
 	
 }
 
-function Position(x,y) {
+function Position(x, y) {
 	this.x = x;
+	this.y = y;
+}
+
+Position.prototype.setPosition (x,y) {
+    this.x = x;
 	this.y = y;
 }
 
