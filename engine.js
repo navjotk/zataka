@@ -33,14 +33,18 @@ Engine.prototype.updateState = function(player) {
   player.position.setPosition (x, y);
   
   //Update position history
-  x = Math.round(x);
-  y = Math.round(y);
-  if ( player.positionHistory.length == 0 || x != ((player.positionHistory[player.positionHistory.length-1]).x) || 
-		y != ((player.positionHistory[player.positionHistory.length-1]).y) )
+  //x = Math.round(x);
+  //y = Math.round(y);
+  //if ( player.positionHistory.length == 0 || x != ((player.positionHistory[player.positionHistory.length-1]).x) || 
+	//	y != ((player.positionHistory[player.positionHistory.length-1]).y) )
 	player.positionHistory.push (new Position(x,y));
   
   //Reset the input
   player.setInput (0);
+}
+
+Engine.prototype.inViscinity = function (point1, point2) {
+  return ((((point1.x - point2.x)*(point1.x - point2.x)) + ((point1.y - point2.y)*(point1.y - point2.y))) < 49);
 }
 
 Engine.prototype.getCollisions = function(players) {
@@ -63,12 +67,14 @@ Engine.prototype.getCollisions = function(players) {
 //	  if (player == otherPlayer) continue;
 	  var otherPositionHistory = otherPlayer.positionHistory;
 	  for (otherPosition in otherPositionHistory) {
-			if (player == otherPlayer && otherPosition == (otherPositionHistory.length-1))
+			if (player == otherPlayer && otherPosition > (otherPositionHistory.length-(8*(Math.round((1.4/game.PLAYER_SPEED))))))
 				continue;
 			// Collided with opponent?
 			var otherPosition = otherPositionHistory[otherPosition];
-			if (Math.round(player.position.x) == otherPosition.x &&
-					Math.round(player.position.y) == otherPosition.y) {
+			if (this.inViscinity (player.position, otherPosition)) {
+//			if (Math.round(player.position.x) == otherPosition.x &&
+	//				Math.round(player.position.y) == otherPosition.y) {
+			  console.log('Death!');
 			  player.kill();
 			  break;
 			}

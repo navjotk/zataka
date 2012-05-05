@@ -1,7 +1,7 @@
 function Game(canvas, timerCanvas) {
-	this.SCREEN_HEIGHT = 500;
-	this.SCREEN_WIDTH = 500;
-	this.PLAYER_SPEED = 0.3;
+	this.SCREEN_HEIGHT = 600;
+	this.SCREEN_WIDTH = 600;
+	this.PLAYER_SPEED = 0.6;
 	this.TIMER_INTERVAL = 10;
 	this.THETA_MOVE = 0.2;
 	this.players = new Array();

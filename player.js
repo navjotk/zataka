@@ -13,7 +13,7 @@ function Player(color, renderer, initial_position, initial_velocity, game) {
 }
 
 Player.prototype.moveBy = function(diff_x, diff_y) {
-	this.renderer.drawMove(this.position.x, this.position.y, diff_x, diff_y, this.color);
+	this.renderer.drawDot(this.position.x+diff_x, this.position.y+diff_y, this.color);
 };
 
 Player.prototype.setInput = function(input) {
