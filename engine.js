@@ -22,6 +22,7 @@ Engine.prototype.process = function(players) {
   for (player in players) {
 	updateState (player);
   //getCollisions (players);
+  }
 }
 
 Engine.prototype.updateState = function(player) {
@@ -31,11 +32,11 @@ Engine.prototype.updateState = function(player) {
   switch(player.input.which) {
     //left
     case 37:
-      turn = this.THETA_MOVE;
+      turn = this.game.THETA_MOVE;
       break;
     //right
     case 39:
-      turn = -1 * this.THETA_MOVE
+      turn = -1 * this.game.THETA_MOVE
 	  break;
 	case 0:
 	  turn = 0;

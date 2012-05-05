@@ -3,6 +3,7 @@ function Game(canvas, timerCanvas) {
 	this.SCREEN_WIDTH = 500;
 	this.PLAYER_SPEED = 5;
 	this.TIMER_INTERVAL = 500;
+	this.THETA_MOVE = 0.1;
 	this.players = new Array();
 	this.renderer = new Renderer(canvas, this);
 	this.colors = ['#f00', '#0f0', '#00f'];
