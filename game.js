@@ -1,13 +1,13 @@
 function Game(canvas, timerCanvas) {
 	this.SCREEN_HEIGHT = 500;
 	this.SCREEN_WIDTH = 500;
-	this.PLAYER_SPEED = 10;
-	this.TIMER_INTERVAL = 500;
-	this.THETA_MOVE = 0.05;
+	this.PLAYER_SPEED = 0.3;
+	this.TIMER_INTERVAL = 10;
+	this.THETA_MOVE = 0.2;
 	this.players = new Array();
 	this.renderer = new Renderer(canvas, this);
 	this.colors = ['#f00', '#0f0', '#00f'];
-	this.keyMappings = [[37,39]];
+	this.keyMappings = [[37,39],[81,87],[67,86]];
 	this.keyCodes = {};
 	this.engine = new Engine(this);
 	this.countdownTime = 3;
@@ -52,11 +52,11 @@ Game.prototype.initializeKeyCodes = function() {
 }
 
 Game.prototype.keyDown = function(event) {
-	//console.log(event.keyCode);
+	console.log(event.keyCode);
 	if(this.keyCodes[event.keyCode]!=undefined) {
 		//console.log(this.keyCodes[event.keyCode]);
 		var code = this.keyCodes[event.keyCode];
-		//console.log(code);
+		console.log(code);
 		var player = this.players[code.player];
 		player.setInput(code.action);
 	}

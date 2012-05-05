@@ -13,13 +13,8 @@ Renderer.prototype.drawDot = function(x,y,color) {
 	point.attr({fill: color, stroke: color});
 };
 
-Renderer.prototype.drawMove = function(curr_x, curr_y, move_x, move_y) {
-	console.log(curr_x);
-	console.log(curr_y);
-	console.log(move_x);
-	console.log(move_y);
-	console.log("$$$$$");
+Renderer.prototype.drawMove = function(curr_x, curr_y, move_x, move_y, color) {
 	var line = this.paper.path("M "+curr_x+" "+curr_y+" l "+move_x+" "+move_y);
-	line.attr({stroke: point_fill_color, 'stroke-width': point_width});
+	line.attr({stroke: color, 'stroke-width': point_width});
 };
 

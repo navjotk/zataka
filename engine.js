@@ -22,15 +22,14 @@ Engine.prototype.updateState = function(player) {
   var turn = 0;
   //Get turn
   turn = player.input * this.game.THETA_MOVE;
-  
   //Update velocity first
   mag = player.velocity.mag;
   theta = player.velocity.theta + turn;
   player.velocity.setPolar (mag,theta);
   
   //Update position
-  x = player.position.x + velocity.dx;
-  y = player.position.y + velocity.dy;
+  x = player.position.x + player.velocity.dx;
+  y = player.position.y + player.velocity.dy;
   player.position.setPosition (x, y);
   
   //Update position history
@@ -43,20 +42,24 @@ Engine.prototype.updateState = function(player) {
 Engine.prototype.getCollisions = function(players) {
   //Process collisions for each player's current position
   for (player in players) {
+  	var player = players[player];
     if (!player.isAlive)
 	  continue;
 
 	//Get other player collisions
 	for (otherPlayer in players) {
+		var otherPlayer = players[otherPlayer];
 	  if (!player.isAlive)
 	    break;
-	  if (!otherPlayer.isAlive || otherPlayer == player)
+	  if (player == otherPlayer)
 	    continue;
-	  for (otherPosition in otherPlayer.positionHistory)
-		// Collided with opponent?
-		if (Math.round(player.position.x) == Math.round(otherPosition.x) && Math.round(player.position.y) == Math.round(otherPosition.y)) {
-		  player.isAlive = false;
-		  break;
+	  for (otherPosition in otherPlayer.positionHistory) {
+			// Collided with opponent?
+			var otherPosition = otherPlayer.positionHistory[otherPosition];
+			if (Math.round(player.position.x) == Math.round(otherPosition.x) && Math.round(player.position.y) == Math.round(otherPosition.y)) {
+			  player.isAlive = false;
+			  break;
+			}
 		}
 	}
   }
