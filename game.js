@@ -1,11 +1,16 @@
-function Game(canvas) {
+function Game(canvas, timerCanvas) {
 	this.SCREEN_HEIGHT = 500;
 	this.SCREEN_WIDTH = 500;
 	this.PLAYER_SPEED = 5;
+	this.TIMER_INTERVAL = 500;
 	this.players = new Array();
 	this.renderer = new Renderer(canvas, this);
 	this.colors = ['#f00', '#0f0', '#00f'];
 	this.engine = new Engine(this);
+	this.countdownTime = 3;
+	this.timerCanvas = timerCanvas;
+	timerCanvas.innerHTML = "Starting";
+	window.setTimeout("game.countdownTick()", 1000 );
 }
 
 Game.prototype.addPlayer = function() {
@@ -18,13 +23,34 @@ Game.prototype.addPlayer = function() {
 	this.players.push(player);
 	return true;
 }
+
+Game.prototype.countdownTick = function() {
+	if(this.countdownTime<1) {
+		this.timerCanvas.innerHTML = "";
+		this.start();
+		return;
+	}
+	this.timerCanvas.innerHTML = this.countdownTime+ " seconds to go";
+	this.countdownTime--;
+	window.setTimeout("game.countdownTick()", 1000);
+}
+Game.prototype.start = function() {
+	window.setTimeout("game.tick()", this.TIMER_INTERVAL);
+}
+
+Game.prototype.tick = function() {
+	//Game tick
+	window.setTimeout("game.tick()", this.TIMER_INTERVAL);
+}
+
 var game;
 
 window.onload = function() {
-	game = new Game(document.getElementById('canvas_container'));
+	window.game = new Game(document.getElementById('canvas_container'), document.getElementById('timer_container'));
 	game.addPlayer();
 	game.addPlayer();
 	game.addPlayer();
+	
 }
 
 function Position(x,y) {
