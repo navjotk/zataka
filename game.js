@@ -100,6 +100,10 @@ Position.prototype.setPosition = function (x,y) {
 	}
 }
 
+Position.prototype.setListener = function(listener) {
+	this.changeListener = listener;
+}
+
 function Velocity() {
 }
 
