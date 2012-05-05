@@ -17,7 +17,7 @@ Renderer.prototype.drawDot = function(x,y,color) {
 };
 
 Renderer.prototype.drawMove = function(curr_x, curr_y, move_x, move_y) {
-	var line = paper.path("M "+curr_x+" "+curr_y+" l "+move_x+" "+move_y);
+	var line = this.paper.path("M "+curr_x+" "+curr_y+" l "+move_x+" "+move_y);
 	line.attr({stroke: point_fill_color, 'stroke-width': point_width});
 };
 

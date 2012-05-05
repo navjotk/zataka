@@ -67,7 +67,7 @@ Game.prototype.start = function() {
 	window.onkeydown = function(event) {
 		game.keyDown(event);
 	}
-	game.initializeKeyCodes();
+	this.initializeKeyCodes();
 }
 
 Game.prototype.tick = function() {
