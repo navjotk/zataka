@@ -89,11 +89,15 @@ window.onload = function() {
 function Position(x, y) {
 	this.x = x;
 	this.y = y;
+	this.changeListener = null;
 }
 
 Position.prototype.setPosition = function (x,y) {
     this.x = x;
 	this.y = y;
+	if(this.changeListener!=null) {
+		this.changeListener(this.x, this.y);
+	}
 }
 
 function Velocity() {

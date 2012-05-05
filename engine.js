@@ -35,7 +35,7 @@ Engine.prototype.updateState = function(player) {
   player.position.setPosition (x, y);
   
   //Update position history
-  player.positionHistory.push (new position(x,y));
+  player.positionHistory.push (new Position(x,y));
   
   //Reset the input
   player.setInput (0);
@@ -66,6 +66,8 @@ Engine.prototype.getCollisions = function(players) {
 
 Engine.prototype.process = function(players) {
   for (player in players) {
+  	var player = players[player];
+  	console.log(player);
     if (player.isAlive)
 	  this.updateState (player);
   	this.getCollisions (players);

@@ -16,3 +16,8 @@ Player.prototype.moveBy = function(diff_x, diff_y) {
 Player.prototype.setInput = function(input) {
 	this.input = input;
 }
+
+Player.prototype.handlePositionChanged = function(x,y) {
+	var diff_x = x-this.x;
+	var diff_y = y-this.y;
+}
